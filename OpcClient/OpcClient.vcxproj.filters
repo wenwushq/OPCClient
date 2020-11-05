@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="3rdparty">
+      <UniqueIdentifier>{d8de3a35-7e0f-4523-9d78-ab0154dcafd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\OPCClientToolKit">
+      <UniqueIdentifier>{265e8f6f-2024-471c-bfa8-60fb2d593d12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\OPCClientToolKit\Header Files">
+      <UniqueIdentifier>{848fccf7-fbea-4b82-b6a8-c3c269f2d55d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\OPCClientToolKit\Source Files">
+      <UniqueIdentifier>{7321ee7e-b5f3-4815-bf0b-f4ec8fb03ed3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\OPCClient.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\opccomn.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\opcda.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\OpcEnum.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\OPCGroup.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\OPCHost.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\OPCItem.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\OPCItemData.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\OPCProperties.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\OPCServer.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3rdparty\OPCClientToolKit\Transaction.h">
+      <Filter>3rdparty\OPCClientToolKit\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LocalSyncOPCCLient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opcclient_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\opccomn_i.c">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\opcda_i.c">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\OpcEnum_i.c">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\OPCClient.cpp">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\OPCGroup.cpp">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\OPCHost.cpp">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\OPCItem.cpp">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\OPCItemData.cpp">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\OPCProperties.cpp">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\OPCServer.cpp">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rdparty\OPCClientToolKit\Transaction.cpp">
+      <Filter>3rdparty\OPCClientToolKit\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LocalSyncOPCCLient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
