@@ -24,9 +24,9 @@ COpcClient::COpcClient()
 
 COpcClient::~COpcClient()
 {
-	::CoUninitialize();
 	std::cout << "退出COM组件..." << std::endl;
 	ClearMemory();
+	::CoUninitialize();
 }
 
 bool COpcClient::ConnectServer(const char * szHostName, const char* szProgID)
@@ -81,39 +81,21 @@ bool COpcClient::ConnectServer(const char * szHostName, const char* szProgID)
 	return true;
 }
 
-void COpcClient::MoniterItem(const char * szItemName, ITEMDATATYPE eDataType)
+void COpcClient::MoniterItem(const char * szItemName, VARENUM eDataType)
 {
 	if (!m_pIItemMgt) return;
 	USES_CONVERSION;
 	OPCITEMDEF item;
 	ZeroMemory(&item, sizeof(item));
 	item.szItemID = A2W(szItemName);
-	switch (eDataType)
-	{
-	case Data_bool:
-		item.vtRequestedDataType = VT_BOOL;
-		break;
-	case Data_int:
-		item.vtRequestedDataType = VT_I4;
-		break;
-	case Data_float:
-		item.vtRequestedDataType = VT_R4;
-		break;
-	case Data_double:
-		item.vtRequestedDataType = VT_R8;
-		break;
-	case Data_string:
-		item.vtRequestedDataType = VT_BSTR;
-		break;
-	default:
-		item.vtRequestedDataType = VT_R4;
-		break;
-	}
+	item.vtRequestedDataType = eDataType;
 	OPCITEMRESULT *pItemResult = NULL;
 	HRESULT *pErrors = NULL;
 	HRESULT hr = m_pIItemMgt->AddItems(1, &item, &pItemResult, (HRESULT**)&pErrors);
-	if(SUCCEEDED(hr))
+	if (SUCCEEDED(hr) && pItemResult && pItemResult->hServer)
 		m_mapItemHandle[szItemName] = pItemResult;
+	else
+		std::cout << "监视  " << szItemName << "  失败，请查找原因" << std::endl;
 	CoTaskMemFree(pErrors);
 }
 
@@ -155,7 +137,10 @@ VARIANT COpcClient::ReadItemValueSync(const char * szItemName)
 	OPCITEMSTATE *pItemValue = NULL;
 	OPCITEMRESULT *pItemResult = m_mapItemHandle[szItemName];
 	if (!pItemResult)
+	{
+		std::cout << "读取  " << szItemName << "  失败，请查找原因" << std::endl;
 		return varRet;
+	}
 
 	HRESULT hr = m_pSyncIO->Read(OPC_DS_CACHE, 1, &pItemResult->hServer, &pItemValue, &pErrors);
 
@@ -164,7 +149,19 @@ VARIANT COpcClient::ReadItemValueSync(const char * szItemName)
 
 	CoTaskMemFree(pItemValue);
 	CoTaskMemFree(pErrors);
-	std::cout << V_I4(&varRet) << std::endl;
+	if (varRet.vt == VT_I4)
+		std::cout << V_I4(&varRet) << std::endl;
+	else if (varRet.vt == VT_BOOL)
+		std::cout << V_BOOL(&varRet) << std::endl;
+	else if (varRet.vt == VT_R4)
+		std::cout << V_R4(&varRet) << std::endl;
+	else if (varRet.vt == VT_R8)
+		std::cout << V_R8(&varRet) << std::endl;
+	else if (varRet.vt == VT_BSTR)
+	{
+		USES_CONVERSION;
+		std::cout << W2A(varRet.bstrVal) << std::endl;
+	}
 	return varRet;
 }
 
@@ -175,7 +172,10 @@ bool COpcClient::WriteItemValueSync(const char * szItemName, VARIANT varValue)
 	HRESULT *pErrors = NULL;
 	OPCITEMRESULT *pItemResult = m_mapItemHandle[szItemName];
 	if (!pItemResult)
+	{
+		std::cout << "向  " << szItemName << "  写值失败，请查找原因" << std::endl;
 		return false;
+	}
 
 	HRESULT hr = m_pSyncIO->Write(1, &pItemResult->hServer, &varValue, &pErrors);
 	if (SUCCEEDED(hr))

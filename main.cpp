@@ -8,19 +8,20 @@ int main()
 {
 	COpcClient opcClient;
 	opcClient.ConnectServer("127.0.0.1");
-	opcClient.MoniterItem("组1.TAG1", Data_int);
-	opcClient.MoniterItem("组1.TAG2", Data_int);
-	opcClient.MoniterItem("Random.Int4", Data_int);
+	opcClient.MoniterItem("组1.TAG1", VT_BSTR);
+	opcClient.MoniterItem("组1.TAG2", VT_I4);
+	opcClient.MoniterItem("Random.Int4", VT_I4);
 	VARIANT varValue;
 	varValue.vt = VT_I4;
 	varValue.lVal = 20;
-	opcClient.WriteItemValueSync("组1.TAG1", varValue);
+	//opcClient.WriteItemValueSync("组1.TAG2", varValue);
 	while (true)
 	{
 		opcClient.ReadItemValueSync("组1.TAG1");
 		opcClient.ReadItemValueSync("组1.TAG2");
 		opcClient.ReadItemValueSync("Random.Int4");
 		Sleep(1000);
+		break;
 	}
 	opcClient.EnumAllItemName();
 	system("pause");

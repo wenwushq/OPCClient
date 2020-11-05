@@ -5,15 +5,6 @@
 #include <map>
 #include <list>
 
-enum ITEMDATATYPE
-{
-	Data_bool,
-	Data_int,
-	Data_float,
-	Data_double,
-	Data_string
-};
-
 class COpcClient
 {
 public:
@@ -21,7 +12,7 @@ public:
 	~COpcClient();
 
 	bool ConnectServer(const char* szHostName = "127.0.0.1", const char* szProgID = "Matrikon.OPC.Simulation.1");//连接服务器
-	void MoniterItem(const char* szItemName, ITEMDATATYPE eDataType);//需要监视的ITEM项以及这项的数值类型
+	void MoniterItem(const char* szItemName, VARENUM eDataType);//需要监视的ITEM项以及这项的数值类型
 	void EnumAllItemName();//遍历所有的ITEM项并显示，用做调试或测试用
 	VARIANT ReadItemValueSync(const char* szItemName);//同步读取数值
 	bool WriteItemValueSync(const char* szItemName, VARIANT varValue);//同步写数值
