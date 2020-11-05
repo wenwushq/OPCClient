@@ -120,6 +120,7 @@ void COpcClient::MoniterItem(const char * szItemName, ITEMDATATYPE eDataType)
 //遍历所有的ITEM项并显示，用做调试或测试用
 void COpcClient::EnumAllItemName()
 {
+	m_lstItemNames.clear();
 	if (!m_pIServer) return;
 
 	IOPCBrowseServerAddressSpace* pIopcAddressSpace;
@@ -138,12 +139,14 @@ void COpcClient::EnumAllItemName()
 	while ((hr = pIEnumStrings->Next(1, &strName, &nCount)) == S_OK)
 	{
 		std::cout << W2A(strName) << std::endl;
+		m_lstItemNames.push_back(W2A(strName));
 	}
 
 	if (pIopcAddressSpace) pIopcAddressSpace->Release();
 	pIopcAddressSpace = NULL;
 }
 
+//同步读取数值
 VARIANT COpcClient::ReadItemValueSync(const char * szItemName)
 {
 	VARIANT varRet = VARIANT();
@@ -163,6 +166,24 @@ VARIANT COpcClient::ReadItemValueSync(const char * szItemName)
 	CoTaskMemFree(pErrors);
 	std::cout << V_I4(&varRet) << std::endl;
 	return varRet;
+}
+
+//同步写数值
+bool COpcClient::WriteItemValueSync(const char * szItemName, VARIANT varValue)
+{
+	bool bRet = false;
+	HRESULT *pErrors = NULL;
+	OPCITEMRESULT *pItemResult = m_mapItemHandle[szItemName];
+	if (!pItemResult)
+		return false;
+
+	HRESULT hr = m_pSyncIO->Write(1, &pItemResult->hServer, &varValue, &pErrors);
+	if (SUCCEEDED(hr))
+		bRet = true;
+
+	CoTaskMemFree(pErrors);
+
+	return bRet;
 }
 
 //清理内存

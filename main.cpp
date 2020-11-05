@@ -11,6 +11,10 @@ int main()
 	opcClient.MoniterItem("组1.TAG1", Data_int);
 	opcClient.MoniterItem("组1.TAG2", Data_int);
 	opcClient.MoniterItem("Random.Int4", Data_int);
+	VARIANT varValue;
+	varValue.vt = VT_I4;
+	varValue.lVal = 20;
+	opcClient.WriteItemValueSync("组1.TAG1", varValue);
 	while (true)
 	{
 		opcClient.ReadItemValueSync("组1.TAG1");
@@ -18,7 +22,7 @@ int main()
 		opcClient.ReadItemValueSync("Random.Int4");
 		Sleep(1000);
 	}
-	//opcClient.EnumAllItemName();
+	opcClient.EnumAllItemName();
 	system("pause");
 }
 

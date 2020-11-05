@@ -3,6 +3,7 @@
 #include "./opcfoundation/opcda.h"
 #include "./opcfoundation/OpcEnum.h"
 #include <map>
+#include <list>
 
 enum ITEMDATATYPE
 {
@@ -23,6 +24,8 @@ public:
 	void MoniterItem(const char* szItemName, ITEMDATATYPE eDataType);//需要监视的ITEM项以及这项的数值类型
 	void EnumAllItemName();//遍历所有的ITEM项并显示，用做调试或测试用
 	VARIANT ReadItemValueSync(const char* szItemName);//同步读取数值
+	bool WriteItemValueSync(const char* szItemName, VARIANT varValue);//同步写数值
+	const std::list<const char*>* GetItemNames() { return &m_lstItemNames; }
 private:
 	void ClearMemory();//清理内存
 	void AddGroup(const char* szGroupName = "Group");//添加组
@@ -35,5 +38,6 @@ private:
 	IOPCItemMgt *m_pIItemMgt;//项的指针，控制项的添加
 	IOPCSyncIO *m_pSyncIO;//同步读取指针
 	std::map<const char*, OPCITEMRESULT*> m_mapItemHandle;//每一项对应的handle读写的时候需要用到
+	std::list<const char*> m_lstItemNames;
 };
 
